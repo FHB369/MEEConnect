@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/box_cover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Background"
+        app:srcCompat="@color/colorAccent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gradiant_shade"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:src="@drawable/radial_gradiant_shade"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_marginBottom="40dp">
+
+        <TextView
+            android:id="@+id/student_slide_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nickname"
+            android:textSize="40sp"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/comforta_bold"
+            android:textColor="#fff"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/student_slide_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="20sp"
+            android:layout_marginHorizontal="20dp"
+            android:fontFamily="@font/comforta"
+            android:textColor="#fff"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/student_slide_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2016339XXX"
+            android:layout_marginHorizontal="20dp"
+            android:textColor="#fff"
+            android:layout_marginBottom="5dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginVertical="20dp"
+            app:cardBackgroundColor="#00000000"
+            app:cardElevation="0dp"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/slide_blood_group_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp">
+                        <LinearLayout
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:background="@drawable/ic_untitled_1"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginBottom="10dp">
+
+                            <TextView
+                                android:id="@+id/slide_blood_group"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="AB+"
+                                android:textColor="#fff"
+                                android:fontFamily="@font/comforta"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center"/>
+
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Blood\u00A0Group"
+                            android:textSize="13sp"
+                            android:textAlignment="center"
+                            android:textColor="#fff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/slide_birthday_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp">
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:background="@drawable/ic_untitled_1"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/slide_birthday"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="30\nMAY"
+                            android:fontFamily="@font/comforta"
+                            android:textColor="#fff"
+                            android:textSize="15sp"
+                            android:textAlignment="center"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Birthday"
+                        android:textSize="13sp"
+                        android:textAlignment="center"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/slide_messenger_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp">
+                    <Button
+                        android:id="@+id/slide_messenger"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/ic_messenger"
+                        android:layout_marginBottom="10dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Messenger"
+                        android:textSize="13sp"
+                        android:textAlignment="center"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/slide_phone_container"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="10dp">
+                    <Button
+                        android:id="@+id/slide_phone"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:background="@drawable/ic_phone"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phone"
+                        android:textSize="13sp"
+                        android:textAlignment="center"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

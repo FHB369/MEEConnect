@@ -4,15 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +36,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
+import static androidx.core.app.ActivityCompat.requestPermissions;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -37,13 +45,40 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Catagory> catagories;
     private DatabaseReference myRef;
     private Context context;
+    private ImageView settings, search;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (checkSelfPermission( Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+        }
+
         context=this;
+
+        settings = findViewById(R.id.home_settings);
+        search = findViewById(R.id.home_search);
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.left_to_right_exit, R.anim.left_to_right);
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Search.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_to_left, R.anim.right_to_left_exit);
+            }
+        });
 
         recyclerView = findViewById(R.id.home_recycler);
         refreshLayout = findViewById(R.id.home_refresh);
