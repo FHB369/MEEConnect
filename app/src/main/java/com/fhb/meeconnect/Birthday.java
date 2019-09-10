@@ -4,13 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,13 +17,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
-public class Search extends AppCompatActivity {
+public class Birthday extends AppCompatActivity {
 
-    private EditText searchBox;
+    private ImageView back;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout refreshLayout;
     private LinearLayoutManager layoutManager;
     private DatabaseReference myRef;
     private ArrayList<Student> allPeoples;
@@ -33,15 +35,14 @@ public class Search extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_birthday);
 
-        context = this;
-
-        searchBox = findViewById(R.id.search_bar_edittext);
-        recyclerView = findViewById(R.id.search_recycler);
+        back = findViewById(R.id.birthday_back);
+        recyclerView = findViewById(R.id.birthday_recycler);
+        refreshLayout = findViewById(R.id.birthday_refresh);
 
         allPeoples = new ArrayList<>();
-
+        context = this;
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -52,55 +53,40 @@ public class Search extends AppCompatActivity {
 
         initPeoples();
 
-        searchBox.addTextChangedListener(new TextWatcher() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onClick(View view) {
+                onBackPressed();
             }
+        });
 
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                refreshPeoples(charSequence);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
+            public void onRefresh() {
+                initPeoples();
             }
         });
     }
 
-    private void refreshPeoples(CharSequence charSequence) {
-        String query = charSequence.toString().toLowerCase();
-        ArrayList<Student> searchResult = new ArrayList<>();
-        if(query.trim().length()!=0) {
-            for (Student student : allPeoples) {
-                if (student.getNickname().toLowerCase().startsWith(query)) {
-                    searchResult.add(student);
-                } else if (student.getName().toLowerCase().startsWith(query)) {
-                    searchResult.add(student);
-                }else if (student.getNickname().toLowerCase().contains(query)) {
-                    searchResult.add(student);
-                } else if (student.getName().toLowerCase().contains(query)) {
-                    searchResult.add(student);
-                } else if (student.getPhone().toLowerCase().startsWith(query)) {
-                    searchResult.add(student);
-                } else if (student.getRegistrationNo().toLowerCase().startsWith(query)) {
-                    searchResult.add(student);
-                } else if (student.getBloodGroup().toLowerCase().startsWith(query)) {
-                    searchResult.add(student);
-                }
-            }
-        }
-        Collections.reverse(searchResult);
-        SearchRecyclerAdapter adapter = new SearchRecyclerAdapter(searchResult, context);
-        recyclerView.setAdapter(adapter);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public String getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("d MMMM");
+        String strDate = mdformat.format(calendar.getTime());
+        return strDate;
     }
 
     private void initPeoples() {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                refreshLayout.setRefreshing(true);
+                allPeoples =  new ArrayList<>();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if(snapshot.getKey().equals("Teacher") || snapshot.getKey().equals("Staff")){
                         for(DataSnapshot faculty : snapshot.child("peoples").getChildren()){
@@ -113,15 +99,17 @@ public class Search extends AppCompatActivity {
                             String phone = (String) faculty.child("Phone").getValue();
                             String photoURL = (String) faculty.child("Photo").getValue();
 
-                            Student member = new Student(registrationNo,
-                                    bloodGroup,
-                                    birthday,
-                                    messengerID,
-                                    name,
-                                    nickname,
-                                    phone,
-                                    photoURL);
-                            allPeoples.add(member);
+                            if(birthday.equals(getCurrentDate())) {
+                                Student member = new Student(registrationNo,
+                                        bloodGroup,
+                                        birthday,
+                                        messengerID,
+                                        name,
+                                        nickname,
+                                        phone,
+                                        photoURL);
+                                allPeoples.add(member);
+                            }
                         }
                     }else{
                         for(DataSnapshot student : snapshot.child("peoples").getChildren()){
@@ -134,18 +122,23 @@ public class Search extends AppCompatActivity {
                             String phone = (String) student.child("Phone").getValue();
                             String photoURL = (String) student.child("Photo").getValue();
 
-                            Student member = new Student(registrationNo,
-                                    bloodGroup,
-                                    birthday,
-                                    messengerID,
-                                    name,
-                                    nickname,
-                                    phone,
-                                    photoURL);
-                            allPeoples.add(member);
+                            if(birthday.equals(getCurrentDate())) {
+                                Student member = new Student(registrationNo,
+                                        bloodGroup,
+                                        birthday,
+                                        messengerID,
+                                        name,
+                                        nickname,
+                                        phone,
+                                        photoURL);
+                                allPeoples.add(member);
+                            }
                         }
                     }
                 }
+                BirthdayRecyclerAdapter adapter = new BirthdayRecyclerAdapter(allPeoples, context);
+                recyclerView.setAdapter(adapter);
+                refreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -154,11 +147,5 @@ public class Search extends AppCompatActivity {
             }
         });
         Collections.reverse(allPeoples);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.left_to_right_exit, R.anim.left_to_right);
     }
 }

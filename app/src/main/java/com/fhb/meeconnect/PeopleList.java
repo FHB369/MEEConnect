@@ -38,7 +38,7 @@ public class PeopleList extends AppCompatActivity {
     private int catagoryIndex;
     private DatabaseReference myRef;
     private Context context;
-    public static int currentVisiblePosition;
+    public int currentVisiblePosition;
     private LinearLayoutManager layoutManager;
 
     public static int listPosition;
@@ -80,7 +80,11 @@ public class PeopleList extends AppCompatActivity {
 
         refreshPeoples();
 
-        title.setText(catagoryName);
+        if(catagoryName.equals("Teacher") || catagoryName.equals("Staff")) {
+            title.setText(catagoryName+"s");
+        }else{
+            title.setText(catagoryName);
+        }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +171,7 @@ public class PeopleList extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        currentVisiblePosition= 0;
     }
 
     @Override

@@ -58,7 +58,11 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }else if(holder instanceof VHItem){
             String current = list.get(position-1).getCatagoryName();
             final VHItem vhItem = (VHItem) holder;
-            vhItem.title.setText(current);
+            if(current.equals("Teacher") || current.equals("Staff")) {
+                vhItem.title.setText(current+"s");
+            }else{
+                vhItem.title.setText(current);
+            }
 
             Picasso.get()
                     .load(list.get(position-1).getCoverImageURL())

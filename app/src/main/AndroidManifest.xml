@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchDetails"
-            android:theme="@style/AppTheme.Fullscreen" ></activity>
+        <activity android:name=".Birthday"></activity>
+        <activity android:name=".Contributors" />
+        <activity
+            android:name=".SearchDetails"
+            android:theme="@style/AppTheme.Fullscreen" />
         <activity android:name=".Search" />
         <activity android:name=".Settings" />
         <activity
