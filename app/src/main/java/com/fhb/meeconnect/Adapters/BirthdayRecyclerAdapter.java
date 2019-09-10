@@ -1,12 +1,9 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Adapters;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fhb.meeconnect.CircleTransform;
+import com.fhb.meeconnect.R;
+import com.fhb.meeconnect.Activities.SearchDetails;
+import com.fhb.meeconnect.DataElements.Student;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import static androidx.core.app.ActivityCompat.requestPermissions;
 
 /**
  * Created by Faisal Haque Bappy on 10-Sep-19.

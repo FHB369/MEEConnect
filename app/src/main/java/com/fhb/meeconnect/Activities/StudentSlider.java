@@ -1,10 +1,9 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +11,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.fhb.meeconnect.Adapters.StudentSliderAdapter;
+import com.fhb.meeconnect.R;
+import com.fhb.meeconnect.DataElements.Student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

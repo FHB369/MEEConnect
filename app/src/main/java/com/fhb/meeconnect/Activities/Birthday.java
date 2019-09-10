@@ -1,7 +1,8 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -11,6 +12,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.fhb.meeconnect.Adapters.BirthdayRecyclerAdapter;
+import com.fhb.meeconnect.R;
+import com.fhb.meeconnect.DataElements.Student;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +32,7 @@ public class Birthday extends AppCompatActivity {
     private ImageView back;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
+    private ConstraintLayout constraintLayout;
     private LinearLayoutManager layoutManager;
     private DatabaseReference myRef;
     private ArrayList<Student> allPeoples;
@@ -40,6 +46,7 @@ public class Birthday extends AppCompatActivity {
         back = findViewById(R.id.birthday_back);
         recyclerView = findViewById(R.id.birthday_recycler);
         refreshLayout = findViewById(R.id.birthday_refresh);
+        constraintLayout = findViewById(R.id.birthday_constraint);
 
         allPeoples = new ArrayList<>();
         context = this;
@@ -139,6 +146,10 @@ public class Birthday extends AppCompatActivity {
                 BirthdayRecyclerAdapter adapter = new BirthdayRecyclerAdapter(allPeoples, context);
                 recyclerView.setAdapter(adapter);
                 refreshLayout.setRefreshing(false);
+                if(allPeoples.size()==0){
+                    Snackbar snackbar = Snackbar.make(constraintLayout, "No one have birthday today", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
 
             @Override

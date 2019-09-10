@@ -1,18 +1,17 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Adapters;
 
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fhb.meeconnect.R;
+
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by Faisal Haque Bappy on 10-Sep-19.

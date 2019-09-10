@@ -12,21 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Birthday"></activity>
-        <activity android:name=".Contributors" />
+        <activity android:name=".Activities.Birthday"></activity>
+        <activity android:name=".Activities.Contributors" />
         <activity
-            android:name=".SearchDetails"
+            android:name=".Activities.SearchDetails"
             android:theme="@style/AppTheme.Fullscreen" />
-        <activity android:name=".Search" />
-        <activity android:name=".Settings" />
+        <activity android:name=".Activities.Search" />
+        <activity android:name=".Activities.Settings" />
         <activity
-            android:name=".FacultySlider"
+            android:name=".Activities.FacultySlider"
             android:theme="@style/AppTheme.Fullscreen" />
         <activity
-            android:name=".StudentSlider"
+            android:name=".Activities.StudentSlider"
             android:theme="@style/AppTheme.Fullscreen" />
-        <activity android:name=".PeopleList" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.PeopleList" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

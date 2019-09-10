@@ -1,4 +1,4 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.fhb.meeconnect.Adapters.ContributorsRecyclerAdapter;
+import com.fhb.meeconnect.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

@@ -1,10 +1,8 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,27 +14,24 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fhb.meeconnect.Adapters.HomeRecyclerAdapter;
+import com.fhb.meeconnect.DataElements.Catagory;
+import com.fhb.meeconnect.DataElements.Faculty;
+import com.fhb.meeconnect.R;
+import com.fhb.meeconnect.DataElements.Student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
-
-import static androidx.core.app.ActivityCompat.requestPermissions;
 
 public class MainActivity extends AppCompatActivity {
 

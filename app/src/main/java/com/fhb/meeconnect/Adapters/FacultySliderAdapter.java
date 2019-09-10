@@ -1,4 +1,4 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.Adapters;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -20,6 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.fhb.meeconnect.DataElements.Faculty;
+import com.fhb.meeconnect.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -31,11 +33,11 @@ import static androidx.core.app.ActivityCompat.requestPermissions;
 /**
  * Created by Faisal Haque Bappy on 28-Aug-19.
  */
-public class StudentSliderAdapter extends PagerAdapter {
-    private ArrayList<Student> posts;
+public class FacultySliderAdapter extends PagerAdapter {
+    private ArrayList<Faculty> posts;
     private Context context;
 
-    public StudentSliderAdapter(Context context, ArrayList<Student> posts) {
+    public FacultySliderAdapter(Context context, ArrayList<Faculty> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -52,14 +54,14 @@ public class StudentSliderAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.layout_slide_student, container, false);
 
         final ImageView cover = view.findViewById(R.id.box_cover);
-        TextView name = view.findViewById(R.id.student_slide_name);
-        TextView nickname = view.findViewById(R.id.student_slide_nickname);
-        TextView regNo = view.findViewById(R.id.student_slide_reg);
+        TextView name = view.findViewById(R.id.student_slide_nickname);
+        TextView designation = view.findViewById(R.id.student_slide_name);
+        TextView email = view.findViewById(R.id.student_slide_reg);
         TextView bloodGroup = view.findViewById(R.id.slide_blood_group);
         TextView birthday = view.findViewById(R.id.slide_birthday);
         Button messenger = view.findViewById(R.id.slide_messenger);
@@ -95,9 +97,10 @@ public class StudentSliderAdapter extends PagerAdapter {
 
         name.setText(posts.get(position).getName());
         name.setShadowLayer(40, 0, 2, R.color.black);
-        nickname.setText(posts.get(position).getNickname());
-        nickname.setShadowLayer(40, 0, 2, R.color.black);
-        regNo.setText(posts.get(position).getRegistrationNo());
+        designation.setText(posts.get(position).getDesignation());
+        designation.setShadowLayer(40, 0, 2, R.color.black);
+        email.setText(posts.get(position).getEmail());
+        email.setShadowLayer(40, 0, 2, R.color.black);
         if(posts.get(position).getBloodGroup().equals("Choose Blood Group...")){
             LinearLayout layout = view.findViewById(R.id.slide_blood_group_container);
             layout.setVisibility(View.GONE);

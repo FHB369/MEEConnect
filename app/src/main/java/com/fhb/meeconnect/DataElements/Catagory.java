@@ -1,4 +1,4 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.DataElements;
 
 import java.util.ArrayList;
 

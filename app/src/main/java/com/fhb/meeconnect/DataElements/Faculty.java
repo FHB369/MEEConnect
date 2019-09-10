@@ -1,4 +1,4 @@
-package com.fhb.meeconnect;
+package com.fhb.meeconnect.DataElements;
 
 /**
  * Created by Faisal Haque Bappy on 30-Aug-19.
