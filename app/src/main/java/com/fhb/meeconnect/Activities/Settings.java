@@ -51,6 +51,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DatabaseReference mref = FirebaseDatabase.getInstance().getReference();
+                mref.keepSynced(true);
                 mref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

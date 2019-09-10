@@ -70,16 +70,16 @@ public class SearchDetails extends AppCompatActivity {
     }
 
     public void setData(){
-        name.setText(NAME);
+        name.setText(NAME.trim());
         name.setShadowLayer(40, 0, 2, R.color.black);
-        nickname.setText(NICKNAME);
+        nickname.setText(NICKNAME.trim());
         nickname.setShadowLayer(40, 0, 2, R.color.black);
-        regNo.setText(REG);
+        regNo.setText(REG.trim());
         if(BLOOD.equals("Choose Blood Group...")){
             LinearLayout layout = findViewById(R.id.search_detail_blood_group_container);
             layout.setVisibility(View.GONE);
         }else{
-            bloodGroup.setText(BLOOD);
+            bloodGroup.setText(BLOOD.trim());
         }
 
         if(BIRTHDAY.equals("Day Month")){
@@ -114,7 +114,7 @@ public class SearchDetails extends AppCompatActivity {
                     }
                 });
 
-        if(MESSENGER.equals("NA")){
+        if(MESSENGER.trim().equals("NA")){
             LinearLayout layout = findViewById(R.id.search_detail_messenger_container);
             layout.setVisibility(View.GONE);
         }else{
@@ -122,8 +122,12 @@ public class SearchDetails extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(MESSENGER));
-                    startActivity(intent);
+                    intent.setData(Uri.parse(MESSENGER.trim()));
+                    if(MESSENGER.trim().toLowerCase().startsWith("http")) {
+                        startActivity(intent);
+                    }else{
+                        startActivity(Intent.createChooser(intent, "Choose browser"));
+                    }
                 }
             });
         }
@@ -137,7 +141,7 @@ public class SearchDetails extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
                 }
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+PHONE));
+                intent.setData(Uri.parse("tel:"+PHONE.trim()));
                 startActivity(intent);
             }
         });

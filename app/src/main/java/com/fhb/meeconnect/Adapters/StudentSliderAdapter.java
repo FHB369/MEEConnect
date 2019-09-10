@@ -67,7 +67,7 @@ public class StudentSliderAdapter extends PagerAdapter {
         Button messenger = view.findViewById(R.id.slide_messenger);
         Button phone = view.findViewById(R.id.slide_phone);
 
-        if(posts.get(position).getMessengerID().equals("NA")){
+        if(posts.get(position).getMessengerID().trim().equals("NA")){
             LinearLayout layout = view.findViewById(R.id.slide_messenger_container);
             layout.setVisibility(View.GONE);
         }else{
@@ -75,8 +75,12 @@ public class StudentSliderAdapter extends PagerAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(posts.get(position).getMessengerID()));
-                    context.startActivity(intent);
+                    intent.setData(Uri.parse(posts.get(position).getMessengerID().trim()));
+                    if(posts.get(position).getMessengerID().trim().toLowerCase().startsWith("http")) {
+                        context.startActivity(intent);
+                    }else{
+                        context.startActivity(Intent.createChooser(intent, "Choose browser"));
+                    }
                 }
             });
         }
@@ -90,21 +94,21 @@ public class StudentSliderAdapter extends PagerAdapter {
                             new String[]{Manifest.permission.CALL_PHONE}, 1000);
                 }
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:"+posts.get(position).getPhone()));
+                intent.setData(Uri.parse("tel:"+posts.get(position).getPhone().trim()));
                 context.startActivity(intent);
             }
         });
 
-        name.setText(posts.get(position).getName());
+        name.setText(posts.get(position).getName().trim());
         name.setShadowLayer(40, 0, 2, R.color.black);
-        nickname.setText(posts.get(position).getNickname());
+        nickname.setText(posts.get(position).getNickname().trim());
         nickname.setShadowLayer(40, 0, 2, R.color.black);
-        regNo.setText(posts.get(position).getRegistrationNo());
+        regNo.setText(posts.get(position).getRegistrationNo().trim());
         if(posts.get(position).getBloodGroup().equals("Choose Blood Group...")){
             LinearLayout layout = view.findViewById(R.id.slide_blood_group_container);
             layout.setVisibility(View.GONE);
         }else{
-            bloodGroup.setText(posts.get(position).getBloodGroup());
+            bloodGroup.setText(posts.get(position).getBloodGroup().trim());
         }
 
         if(posts.get(position).getBirthday().equals("Day Month")){
