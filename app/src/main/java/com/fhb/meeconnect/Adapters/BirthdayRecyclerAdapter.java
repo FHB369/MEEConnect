@@ -120,10 +120,6 @@ public class BirthdayRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 });
     }
 
-
-
-
-
     @Override
     public int getItemCount() {
         return students.size();

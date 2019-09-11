@@ -2,13 +2,19 @@ package com.fhb.meeconnect.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 
 import com.fhb.meeconnect.Adapters.SearchRecyclerAdapter;
@@ -31,6 +37,8 @@ public class Search extends AppCompatActivity {
     private DatabaseReference myRef;
     private ArrayList<Student> allPeoples;
     private Context context;
+    private Toolbar toolbar;
+    private CardView card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,16 @@ public class Search extends AppCompatActivity {
 
         searchBox = findViewById(R.id.search_bar_edittext);
         recyclerView = findViewById(R.id.search_recycler);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            card = findViewById(R.id.search_card);
+            toolbar = findViewById(R.id.search_toolbar);
+
+            card.setVisibility(View.GONE);
+            toolbar.setVisibility(View.VISIBLE);
+
+            searchBox = findViewById(R.id.toolbar_search_box);
+        }
 
         allPeoples = new ArrayList<>();
 

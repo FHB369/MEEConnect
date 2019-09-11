@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,9 +90,11 @@ public class FacultySliderAdapter extends PagerAdapter {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions((AppCompatActivity) context,
-                            new String[]{Manifest.permission.CALL_PHONE}, 1000);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions((AppCompatActivity) context,
+                                new String[]{Manifest.permission.CALL_PHONE}, 1000);
+                    }
                 }
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 intent.setData(Uri.parse("tel:"+posts.get(position).getPhone().trim()));
@@ -100,11 +103,11 @@ public class FacultySliderAdapter extends PagerAdapter {
         });
 
         name.setText(posts.get(position).getName().trim());
-        name.setShadowLayer(40, 0, 2, R.color.black);
+
         designation.setText(posts.get(position).getDesignation().trim());
-        designation.setShadowLayer(40, 0, 2, R.color.black);
+
         email.setText(posts.get(position).getEmail().trim());
-        email.setShadowLayer(40, 0, 2, R.color.black);
+
         if(posts.get(position).getBloodGroup().equals("Choose Blood Group...")){
             LinearLayout layout = view.findViewById(R.id.slide_blood_group_container);
             layout.setVisibility(View.GONE);

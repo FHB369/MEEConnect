@@ -3,6 +3,8 @@ package com.fhb.meeconnect.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -41,21 +43,36 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private Context context;
     private ImageView settings, search;
+    private Toolbar toolbar;
+    private CardView card;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (checkSelfPermission( Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+        settings = findViewById(R.id.home_settings);
+        search = findViewById(R.id.home_search);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission( Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+            }
+        }else{
+            card = findViewById(R.id.home_card);
+            toolbar = findViewById(R.id.toolbar);
+
+            card.setVisibility(View.GONE);
+            toolbar.setVisibility(View.VISIBLE);
+
+            settings = findViewById(R.id.toolbar_settings);
+            search = findViewById(R.id.toolbar_search);
         }
 
         context=this;
 
-        settings = findViewById(R.id.home_settings);
-        search = findViewById(R.id.home_search);
+
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,6 +13,8 @@
         android:alpha="0.7"
         android:src="#e6edef" />
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +22,42 @@
         tools:layout_editor_absoluteX="199dp"
         tools:layout_editor_absoluteY="370dp">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/toolbar_search_box"
+                    android:layout_width="0dp"
+                    android:layout_weight="6"
+                    android:layout_height="match_parent"
+                    android:hint=" Search..."
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/comforta_bold"
+                    android:backgroundTint="#fff"
+                    android:textSize="22sp"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"/>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/search_card"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:alpha="0.85"

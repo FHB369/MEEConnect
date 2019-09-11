@@ -38,7 +38,7 @@ public class SearchDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_details);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -71,9 +71,7 @@ public class SearchDetails extends AppCompatActivity {
 
     public void setData(){
         name.setText(NAME.trim());
-        name.setShadowLayer(40, 0, 2, R.color.black);
         nickname.setText(NICKNAME.trim());
-        nickname.setShadowLayer(40, 0, 2, R.color.black);
         regNo.setText(REG.trim());
         if(BLOOD.equals("Choose Blood Group...")){
             LinearLayout layout = findViewById(R.id.search_detail_blood_group_container);
@@ -137,8 +135,10 @@ public class SearchDetails extends AppCompatActivity {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+                    }
                 }
                 Intent intent = new Intent(Intent.ACTION_CALL);
                 intent.setData(Uri.parse("tel:"+PHONE.trim()));
